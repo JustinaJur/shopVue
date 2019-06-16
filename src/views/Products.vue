@@ -1,19 +1,19 @@
 <template>
-  <!-- //<li v-for="product in products.products">{{product.name}}</li> -->
-
   <div class="products-container">
     {{search}}
     {{selected}}
     <li v-for="item in selected">{{item}}</li>
     <!-- {filteredData.map(item => -->
-    <div v-for="product in products.products">
+    <div v-for="product in showProducts">
+      <!-- <div v-for="product in products.products"> -->
       <h3>{{product.name}}</h3>
-      <!-- <img height="{100}" v-bind:src={`/products/${{products.image}}`}> -->
-      <!-- <img height="{100}" v-bind:src="/products/{{products.image}}"> -->
-      {{product.description}}
+      <p>{{product.description}}</p>
+      <!-- <img height="{100}" v-bind:src={`/products/${{products.image}}`}> 
+      ///<img height="{100}" v-bind:src="/products/{{products.image}}">-->
+
       <h3>{{product.price}} EUR</h3>
       <div class="buttons">
-        <ButtonAdd @add-item="addItem" :name="name"/>
+        <ButtonAdd @add-item="addItem" :name="name" :product="product"/>
         <!-- <ButtonAdd
           item="{item}"
           addItem="{this.props.addItem}"
@@ -22,16 +22,15 @@
         />
         <ButtonRemove item="{item}" removeItem="{this.props.removeItem}" name="Remove Item"/>-->
       </div>
-    </div>)
-    }
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import products from "../products.json";
 import ButtonAdd from "../components/Listing/ButtonAdd.vue";
+//import products from "../products.json";
 
 export default {
   name: "home",
@@ -41,21 +40,23 @@ export default {
   },
   props: {
     selected: ["selected"],
-    search: String
+    search: String,
+    products: Array,
+    showProducts: Array
   },
   data() {
-    console.log(products.products);
     return {
-      // stones: ["suo", "kate"],
-      products,
-      name: "add item",
-      title: "title"
+      name: "add item"
     };
   },
   methods: {
-    addItem() {
-      console.log("fff");
-      this.$emit("add-item");
+    addItem(e) {
+      console.log(this.showProducts);
+      console.log("is products");
+      ///cia id perduot reik
+      console.log(this.products.products[0]);
+      console.log(this.search);
+      this.$emit("add-item", e);
     }
   }
 };

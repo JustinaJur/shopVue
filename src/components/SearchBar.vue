@@ -1,11 +1,12 @@
 <template>
   <div>
-    {{juste}}
+    {{enteredData}}
     <form v-on:submit.prevent>
+      <!-- <form> -->
       <label>Search products:</label>
       <input
         type="text"
-        v-model="juste"
+        v-model="searchedData"
         v-on:change="handleChangeValue"
         placeholder="Search products..."
       >
@@ -16,14 +17,21 @@
 export default {
   data() {
     return {
-      juste: ""
+      searchedData: ""
     };
   },
+  computed: {
+    enteredData() {
+      return this.searchedData;
+    }
+  },
   methods: {
-    handleChangeValue(e) {
-      this.juste = e.target.value;
-      console.log(e);
-      console.log(e.target.model);
+    handleChangeValue() {
+      // this.juste = e.target.value;
+      // console.log(e);
+      // console.log(e.target.model);
+      console.log(this.enteredData);
+      var e = this.enteredData;
       this.$emit("handle-search", e);
     }
   }

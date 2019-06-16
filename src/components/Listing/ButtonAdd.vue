@@ -1,16 +1,21 @@
 <template>
-  <button v-on:click="addItem">{{name}}</button>
+  <div>
+    <button v-on:click="addItem">{{name}}</button>
+    <!-- {{product}} -->
+  </div>
 </template>
 <script>
 export default {
   name: "ButtonAdd",
   props: {
-    name: String
+    name: String,
+    product: String
   },
   methods: {
     addItem() {
-      console.log("ddd");
-      this.$emit("add-item");
+      // console.log("is mygtuko");
+      // console.log(this.product);
+      this.$emit("add-item", this.product);
     }
   }
 };
